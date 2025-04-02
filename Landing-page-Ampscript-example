@@ -1,0 +1,47 @@
+<!-- AMPSCRIPT START --> 
+%%[ 
+/* DECLARE VARIABLES */
+VAR @subkey, @row, @rows, @CID, @specific 
+
+/* SET THE VARIABLES */
+SET @subKey = RequestParameter("SubscriberKey")
+
+/* Lookup Members record in data extension */
+SET @rows = LookupRows("Your Data Extension here", "SubscriberKey", @subkey)
+
+/* Check if row is returned */
+IF RowCount(@rows) > 0 THEN
+/* Get the first row */
+SET @row = Row(@rows, 1)
+
+/* Retreieve values from the data extension */
+SET @CID = Field(@row, "CID")
+/* Your specific item to check on the page */
+SET @specific = Field(@row, "Data Extension Field Name")
+
+ENDIF
+]%%
+<!-- AMPSCRIPT END -->
+
+We identify on the page that if you are someone who has a specific @CID number in this case =12345 then only the content with the block shows 
+ELSE you see the normal paragraph text. Like wise If you have been identified to have a Specific value which we use @specific to identify as a Y for Yes meaning one value or true or N for No for the other content loads accordingly the ampscript above follows a 
+link from an email utilizing %%=CloudPagesURL(the number of the page , 'SubscriberKey', SubscriberKey)=%% This way the member is identified and checked against what the page is looking for and checks the members record for these values in order to display the custom content. 
+
+ On the actual CloudPage you will want to include IF statements to define the content. For the example above something like 
+<!-- landing page -->
+
+%%[ IF @CID =="12345" THEN ]%%
+Content to display here. Typical html code such as headers, paragraphs, images, buttons, links etc. 
+%%[ELSE]%%
+This content instead
+%%[ENDIF]%%
+
+%%[ IF @specific =="Y" THEN ]%%
+Content to display here
+%%[ENDIF]%%
+
+%%[ IF @specific =="N" THEN ]%%
+Content to display here
+%%[ENDIF]%%
+
+This is so if you want certain members to see certain content, you have a VIP membership you want to thank them for being a member, vs you want to incentivize someone to sign up. You can use this to make one page and display as much variable content as you want. Swap header images based on users status or even offer codes and promos to certain users. 
