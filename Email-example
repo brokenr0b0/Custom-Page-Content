@@ -1,0 +1,31 @@
+
+    <h2>This is a test email</h2> 
+    <p> Click the link below to go to the Page </p>
+    
+    <div id="buttonYes" style="display: block; color: black; border-radius: 10px; border-color: black; width: 300px; padding: 20px;">
+      <!-- Replace the #### with your cloud page ID number found in properties -->
+      <button><a href="%%=CloudPagesURL(#####, 'SubscriberKey', SubscriberKey)=%%" target="_blank">Learn more</a></button> 
+    </div>
+    
+    <p>Thank you for your time.</p>
+    <p><strong> PizzaMagic </strong></p>
+    <custom name="opencounter" type="tracking"/>
+     
+    %%[
+    /* AMPscript - get the current year and automatically feed it in the footer copyright section */
+       SET @CurrentYear = Format(Now(), "yyyy")
+    ]%%
+    
+        <div class="disclaimer-container">
+                      <div class="employers-wrapper">
+                        
+                        <footer class="disclaimer-text-container" tabindex="0">
+                          <p class="disclaimer-text">
+                          <p>©1996-%%=v(@CurrentYear)=%%</p>
+                        </footer>
+          
+                      </div>
+                    </div>
+
+    <!-- EMAIL END -->
+
